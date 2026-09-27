@@ -1,0 +1,1 @@
+SELECT * FROM `full-stack-ecommerce`.customers;
