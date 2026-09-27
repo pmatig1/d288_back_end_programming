@@ -10,36 +10,40 @@ import java.util.Set;
 
 @Entity
 @Table(name = "excursions")
-@Getter @Setter
+@Getter
+@Setter
 public class Excursion {
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "excursion_id")
     private Long id;
 
-    @Column(name = "excursion_title")
+    @Column(name = "excursion_title", nullable = false)
     private String excursion_title;
 
-    @Column(name = "excursion_price")
-    private BigDecimal excusion_price;
+    @Column(name = "excursion_price", nullable = false)
+    private BigDecimal excursion_price;
 
-    @Column(name = "image_URL")
-    private String image_URL;
+    @Column(name = "image_url", nullable = false)
+    private String image_url;
 
     @Temporal(TemporalType.TIMESTAMP)
-    @Column(name = "create_date")
+    @Column(name = "create_date", nullable = false, updatable = false)
     private Date create_date;
 
     @Temporal(TemporalType.TIMESTAMP)
-    @Column(name = "last_update")
+    @Column(name = "last_update", nullable = false)
     private Date last_update;
 
     @ManyToOne
-    @JoinColumn(name = "vacation_id")
+    @JoinColumn(name = "vacation_id", nullable = false)
     private Vacation vacation;
 
     @ManyToMany(mappedBy = "excursions")
     private Set<CartItem> cartitems = new HashSet<>();
 
-    public Excursion() {}
+    public Excursion() {
+    }
 
     @PrePersist
     protected void onCreate() {
@@ -49,5 +53,7 @@ public class Excursion {
     }
 
     @PreUpdate
-    protected void onUpdate() { last_update = new Date(); }
+    protected void onUpdate() {
+        last_update = new Date();
+    }
 }

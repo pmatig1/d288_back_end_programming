@@ -9,20 +9,22 @@ import java.util.Set;
 
 @Entity
 @Table(name = "countries")
-@Getter @Setter
+@Getter
+@Setter
 public class Country {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "country_id")
     private Long id;
 
-    @Column(name = "country_name")
-    private String country_name;
+    @Column(name = "country", nullable = false)
+    private String country;
 
     @Temporal(TemporalType.TIMESTAMP)
-    @Column(name = "create_date")
+    @Column(name = "create_date", nullable = false, updatable = false)
     private Date create_date;
 
     @Temporal(TemporalType.TIMESTAMP)
-    @Column(name = "last_update")
+    @Column(name = "last_update", nullable = false)
     private Date last_update;
 
     @OneToMany(mappedBy = "country")

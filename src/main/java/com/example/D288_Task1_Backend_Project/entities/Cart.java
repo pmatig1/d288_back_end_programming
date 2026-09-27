@@ -12,41 +12,45 @@ import java.util.Set;
 
 @Entity
 @Table(name = "carts")
-@Getter @Setter
+@Getter
+@Setter
 public class Cart {
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "cart_id")
     private Long id;
 
     @Column(name = "order_tracking_number")
     private String orderTrackingNumber;
 
-    @NotNull
-    @Column(name = "package_price")
+    @Column(name = "package_price", nullable = false)
     private BigDecimal package_price;
 
-    @NotNull @Min(1)
-    @Column(name = "party_size")
+    @Column(name = "party_size", nullable = false)
     private int party_size;
 
     @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
     private StatusType status;
 
     @Temporal(TemporalType.TIMESTAMP)
-    @Column(name = "create_date")
+    @Column(name = "create_date", nullable = false, updatable = false)
     private Date create_date;
 
     @Temporal(TemporalType.TIMESTAMP)
-    @Column(name = "last_update")
+    @Column(name = "last_update", nullable = false)
     private Date last_update;
 
     @ManyToOne
-    @JoinColumn(name = "customer_id")
+    @JoinColumn(name = "customer_id", nullable = false)
     private Customer customer;
 
     @OneToMany(mappedBy = "cart")
     private Set<CartItem> cartItems = new HashSet<>();
 
-    public Cart() {}
+    public Cart() {
+
+    }
 
     @PrePersist
     protected void onCreate() {

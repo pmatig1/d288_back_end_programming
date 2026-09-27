@@ -3,43 +3,43 @@ package com.example.D288_Task1_Backend_Project.entities;
 import lombok.Getter;
 import lombok.Setter;
 import javax.persistence.*;
-import javax.validation.constraints.NotBlank;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
 @Entity
 @Table(name = "customers")
-@Getter @Setter
+@Getter
+@Setter
 public class Customer {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "customer_id")
     private Long id;
-
-    @NotBlank
+    @Column(name = "customer_first_name", nullable = false)
     private String firstName;
 
-    @NotBlank
+    @Column(name = "customer_last_name", nullable = false)
     private String lastName;
 
-    @NotBlank
+    @Column(nullable = false)
     private String address;
 
-    @NotBlank
+    @Column(name = "postal_code", nullable = false)
     private String postal_code;
 
-    @NotBlank
+    @Column(nullable = false)
     private String phone;
 
     @Temporal(TemporalType.TIMESTAMP)
-    @Column(name = "create_date")
+    @Column(name = "create_date", nullable = false, updatable = false)
     private Date create_date;
 
     @Temporal(TemporalType.TIMESTAMP)
-    @Column(name = "last_update")
+    @Column(name = "last_update", nullable = false)
     private Date last_update;
 
     @ManyToOne
-    @JoinColumn(name = "division_id")
+    @JoinColumn(name = "division_id", nullable = false)
     private Division division;
 
     @OneToMany(mappedBy = "customer")
