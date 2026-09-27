@@ -4,6 +4,11 @@ import com.example.D288_Task1_Backend_Project.services.CheckoutService;
 import com.example.D288_Task1_Backend_Project.services.Purchase;
 import com.example.D288_Task1_Backend_Project.services.PurchaseResponse;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -21,7 +26,6 @@ public class CheckoutController {
 
     @PostMapping("/purchase")
     public ResponseEntity<PurchaseResponse> placeOrder(@Valid @RequestBody Purchase purchase) {
-        PurchaseResponse response = checkoutService.placeOrder(purchase);
-        return ResponseEntity.ok(response);
+        return ResponseEntity.ok(checkoutService.placeOrder(purchase));
     }
 }
