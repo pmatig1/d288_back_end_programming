@@ -17,15 +17,13 @@ public class RestDataConfig implements RepositoryRestConfigurer {
 
     @Override
     public void configureRepositoryRestConfiguration(RepositoryRestConfiguration config, CorsRegistry cors) {
-        config.exposeIdsFor(
-                Country.class,
-                Division.class,
-                Customer.class,
-                Cart.class,
-                CartItem.class,
-                Vacation.class,
-                Excursion.class
-        );
+        config.exposeIdsFor(Country.class);
+        config.exposeIdsFor(Division.class);
+        config.exposeIdsFor(Customer.class);
+        config.exposeIdsFor(Cart.class);
+        config.exposeIdsFor(CartItem.class);
+        config.exposeIdsFor(Vacation.class);
+        config.exposeIdsFor(Excursion.class);
 
         cors.addMapping("/**")
                 .allowedOrigins("*")
